@@ -1,12 +1,13 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('', include('core.urls', namespace="core")),
+    path('', include('movie.urls', namespace="movie")),
 ]
 
 if settings.DEBUG:

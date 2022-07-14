@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'core',
+    'movie',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,5 @@ MEDIA_URL='/media/'
 STATICFILES_DIRS=[
     BASE_DIR/'static'
 ]
+
+AUTH_USER_MODEL = "core.CustomUser" 
