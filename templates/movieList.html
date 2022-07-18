@@ -1,38 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix - Profile</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-</head>
-<body class='font-primary'>
-    <nav class="flex justify-between items-center py-3 px-4 fixed w-full z-50">
-        <div class="w-6/12">
-            <img src="assets/netflix.png" alt="logo" class="w-5/12 md:w-2/12">
-        </div>
+{% extends 'base.html' %}
+{% load static %}
 
-        <div>
-            <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
-                Log out
-            </button>
-        </div>
-        
-    </nav>
+{% block title %}
+    Enjoy Netflix
+{% endblock title %}
+
+{% block others %}
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+{% endblock others %}
+
+{% block content %}
+
+    {% include "partials/navbar.html" %}
+
     <main class='bg-primary_black min-h-screen w-full'>
-        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex justify-end items-end bg-cover" style="background-image: url('assets/movie.webp');">
+        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex justify-end items-end bg-cover" style="background-image: url({% static 'movie.webp' %});">
             <div>
                 <h2 class="text-6xl font-semibold text-white my-4">
                     Vikings
                 </h2>
                 <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus repellendus odit perspiciatis nostrum culpa exercitationem quis. Ab obcaecati odio minus. Dolorum sapiente eaque, repellendus ea fugiat amet fuga libero at!
+                    Vikings is a historical drama television series created and written by Michael Hirst for the History channel, a Canadian network. Filmed in Ireland, it premiered on March 3, 2013, in Canada. The series concluded on December 30, 2020, when the second half of the sixth season was released in its entirety on Amazon Prime Video in Ireland, ahead of its broadcast on History in Canada from January 1 to March 3, 2021. A sequel series, titled Vikings: Valhalla, premiered on Netflix on February 25, 2022.
+                </p>
+                <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
+                    Vikings is inspired by the sagas of Ragnar Lodbrok, a Viking who is one of the best-known legendary Norse heroes and notorious as the scourge of Anglo-Saxon England and West Francia. The show portrays Ragnar as a farmer who rises to fame by raiding England and eventually becomes a Scandinavian king, with the support of his family and fellow warriors. In the later seasons, the series follows the fortunes of his sons and their adventures in England, Scandinavia, Kievan Rus', the Mediterranean and North America. 
                 </p>
                 <div class="flex my-4">
 
-                    <button class="flex items-center bg-white py-2 px-5 rounded-md">
+                    <button class="flex items-center bg-white py-2 px-5 rounded-md" style="color:black">
                         <ion-icon name="play" class="text-2xl"></ion-icon>
                         <span class="ml-3 font-medium">
                             Play
@@ -51,39 +46,25 @@
         </section> 
         <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
             <div class="p-8 w-10/12 relative" >
+
                 <h2 class="text-gray-200 text-2xl font-medium">
                     Popular on Netflix
                 </h2>
-                <div class="flex justify-center  items-center min-w-full  movie_lis">
-                    <div class=" h-40 m-4  bg-blue-500 flex-shrink-0 rounded-md cursor-pointer w-40">
-                        
-                    </div>
 
-                    <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer w-40" >
-        
-                    </div>
+                <div class="flex justify-center items-center min-w-full movie_list">
 
-                    <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer w-40" >
-        
-                    </div>
+                    {% for item in movies %}
+                        <a href="">
+                            <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
+                                <img src="{{ item.flyer.url }}" class="w-full h-full " alt="">
+                            </div>
+                        </a>
+                    {% endfor %}
 
-                    <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer w-40" >
-        
-                    </div>
 
-                    <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
-                        <img src="assets/movie.webp" class="w-full h-full " alt="">
-                    </div>
-
-                    <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer w-40" >
-        
-                    </div>
-
-                
                 </div>
             </div>
         </section>
         
     </main>
-</body>
-</html>
+{% endblock content %}
