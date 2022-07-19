@@ -54,9 +54,9 @@
                 <div class="flex justify-center items-center min-w-full movie_list">
 
                     {% for item in movies %}
-                        <a href="">
-                            <div class="flex-shrink-0  h-40 m-4  bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
-                                <img src="{{ item.flyer.url }}" class="w-full h-full " alt="">
+                        <a href="{% url 'movie:movie_detail' movie_id=item.uuid %}">
+                            <div class="flex-shrink-0 h-60 m-4 bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
+                                <img src="{{ item.flyer.url }}" class="object-cover" alt="">
                             </div>
                         </a>
                     {% endfor %}
@@ -68,3 +68,4 @@
         
     </main>
 {% endblock content %}
+
