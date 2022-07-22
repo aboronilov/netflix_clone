@@ -40,5 +40,21 @@ class ShowMovieDetail(View):
             context = {
                 'movie': movie
             }
+            return render(request, 'movieDetail.html', context=context)
+        
+
+@method_decorator(login_required, name="dispatch")
+class ShowMovie(View):
+    def get(self, request, *args, **kwargs):
+        movie_id = kwargs.get('movie_id')
+        try:
+            movie = Movie.objects.get(uuid=movie_id)
+        except Movie.DoesNotExist:
+            return redirect(to="core:profile_list")
+        else:
+            videos = movie.videos.values()
+            context = {
+                'movie': list(videos)
+            }
             return render(request, 'showMovie.html', context=context)
 

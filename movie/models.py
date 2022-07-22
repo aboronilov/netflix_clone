@@ -20,6 +20,7 @@ class Movie(models.Model):
     type = models.CharField(max_length=10, choices=TYPE_CHOICES)
     videos = models.ManyToManyField('video')
     flyer = models.ImageField(upload_to='flyers')
+    background = models.ImageField(upload_to='backgrounds')
     age_limit = models.CharField(max_length=10, choices=AGE_CHOICES)
     
 class Video(models.Model):
