@@ -13,58 +13,74 @@
 
     {% include "partials/navbar.html" %}
 
-    <main class='bg-primary_black min-h-screen w-full'>
-        <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex justify-end items-end bg-cover" style="background-image: url({% static 'movie.webp' %});">
-            <div>
-                <h2 class="text-6xl font-semibold text-white my-4">
-                    Vikings
-                </h2>
-                <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    Vikings is a historical drama television series created and written by Michael Hirst for the History channel, a Canadian network. Filmed in Ireland, it premiered on March 3, 2013, in Canada. The series concluded on December 30, 2020, when the second half of the sixth season was released in its entirety on Amazon Prime Video in Ireland, ahead of its broadcast on History in Canada from January 1 to March 3, 2021. A sequel series, titled Vikings: Valhalla, premiered on Netflix on February 25, 2022.
-                </p>
-                <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    Vikings is inspired by the sagas of Ragnar Lodbrok, a Viking who is one of the best-known legendary Norse heroes and notorious as the scourge of Anglo-Saxon England and West Francia. The show portrays Ragnar as a farmer who rises to fame by raiding England and eventually becomes a Scandinavian king, with the support of his family and fellow warriors. In the later seasons, the series follows the fortunes of his sons and their adventures in England, Scandinavia, Kievan Rus', the Mediterranean and North America. 
-                </p>
-                <div class="flex my-4">
-
-                    <button class="flex items-center bg-white py-2 px-5 rounded-md" style="color:black">
-                        <ion-icon name="play" class="text-2xl"></ion-icon>
-                        <span class="ml-3 font-medium">
-                            Play
-                        </span>
-                    </button>
-    
-                    <button class="ml-4 text-white flex items-center bg-gray-500 bg-opacity-80 py-2 px-5 rounded-md">
-                       
-                        <ion-icon name="information-circle-outline" class="text-2xl" ></ion-icon>
-                        <span class="ml-3 font-medium">
-                            More Info
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </section> 
-        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-            <div class="p-8 w-10/12 relative" >
-
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Popular on Netflix
-                </h2>
-
-                <div class="flex justify-center items-center min-w-full movie_list">
-
-                    {% for item in movies %}
-                        <a href="{% url 'movie:movie_detail' movie_id=item.uuid %}">
-                            <div class="flex-shrink-0 h-60 m-4 bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
-                                <img src="{{ item.flyer.url }}" class="object-cover" alt="">
-                            </div>
+        <main class='bg-primary_black min-h-screen w-full'>
+            <section class="h-screen relative bg-no-repeat pb-8 pl-6 flex items-end bg-cover" style="background-image: url('{{random_movie.background.url}}');">
+                <div>
+                    <h2 class="text-6xl font-semibold text-white my-4">
+                        {{random_movie.title}}
+                    </h2>
+                    <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
+                        {{random_movie.moto}}
+                    </p>
+                    <div class="flex my-4">
+                        <a href="{% url 'movie:play' movie_id=random_movie.uuid %}">
+                            <button class="flex items-center bg-white py-2 px-5 rounded-md" style="color:black">
+                                <ion-icon name="play" class="text-2xl"></ion-icon>
+                                <span class="ml-3 font-medium">
+                                    Play
+                                </span>
+                            </button>        
                         </a>
-                    {% endfor %}
-
-
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section> 
+            <section class='bg-primary_black relative min-h-screen flex justify-center py-10'>
+                <div class="p-8 w-10/12 relative" >
+                    {% if random_movie.type == "Series" %}
+                        <div class="margin-top:2rem;margin-bottom:2rem;">
+
+                            <h2 class="text-gray-200 text-3xl font-medium">
+                                Episode
+                            </h2>
+                            {% for episode in random_movie.videos.all %}
+                                <h3 class="text-lg">
+                                    <a href="{% url 'movie:play' movie_id=random_movie.uuid%}?epi={{forloop.counter0}}">
+                                        {{forloop.counter}} - {{episode.title}}
+                                    </a>
+                                </h3>
+                            {% endfor %}
+                        </div>                    
+                    {% else %}
+                    {% endif %}
+                    <h2 class="text-gray-200 text-3xl font-medium">
+                        Description
+                    </h2>
+                    <div class="flex justify-center  items-center min-w-full  movie_list py-8">
+                        <p class="text-gray-100 text-lg">
+                            {% autoescape on %}
+                                {{random_movie.description|linebreaks}}
+                            {% endautoescape %}
+                        </p>
+                    </div>
+                    <div class="w-10/12 relative">
+                        <h2 class="text-gray-200 text-2xl font-medium">
+                            Popular on Netflix
+                        </h2>
+        
+                        <div class="flex justify-center items-center min-w-full movie_list">
+        
+                            {% for item in other_movies %}
+                                <a href="{% url 'movie:movie_detail' movie_id=item.uuid %}">
+                                    <div class="flex-shrink-0 h-60 m-4 bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
+                                        <img src="{{ item.flyer.url }}" class="object-cover" alt="">
+                                    </div>
+                                </a>
+                            {% endfor %}        
+        
+                        </div>
+                    </div>
+                </div>
+            </section>            
         
     </main>
 {% endblock content %}

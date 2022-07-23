@@ -5,6 +5,8 @@ from django.views import View
 from core.models import Profile
 from .models import Movie
 
+from random import choice
+
 @method_decorator(login_required, name="dispatch")
 class MovieList(View):
     def get(self, request, *args, **kwargs):
@@ -15,14 +17,22 @@ class MovieList(View):
             return redirect(to="core:profile_list")
         else:    
             if profile in request.user.profiles.all():
-                movies = Movie.objects.filter(age_limit=profile.age_limit)
-                try:
-                    showcase = movies.first()
-                except showcase.DoesNotExist:
-                    pass
+                # movies = Movie.objects.filter(age_limit=profile.age_limit)
+                # try:
+                #     showcase = movies.first()
+                # except showcase.DoesNotExist:
+                #     pass
+                # context = {
+                #     'movies': movies,
+                #     'show_case': showcase
+                # }
+                movies_pks = Movie.objects.values_list('pk', flat=True)
+                random_pk = choice(movies_pks)
+                random_movie = Movie.objects.get(pk=random_pk)
+                other_movies = Movie.objects.exclude(pk=random_pk)
                 context = {
-                    'movies': movies,
-                    'show_case': showcase
+                    'random_movie': random_movie,
+                    'other_movies': other_movies,
                 }
                 return render(request, 'movieList.html', context=context)
         return render(request, 'movieList.html')
@@ -37,8 +47,10 @@ class ShowMovieDetail(View):
         except Movie.DoesNotExist:
             return redirect(to="core:profile_list")
         else:
+            other_movies = Movie.objects.exclude(uuid=movie_id)
             context = {
-                'movie': movie
+                'movie': movie,
+                'other_movies': other_movies
             }
             return render(request, 'movieDetail.html', context=context)
         

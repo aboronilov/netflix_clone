@@ -52,15 +52,37 @@
                     <h2 class="text-gray-200 text-3xl font-medium">
                         Description
                     </h2>
-                    <div class="flex justify-center  items-center min-w-full  movie_lis">
+                    <div class="flex justify-center  items-center min-w-full  movie_lis py-8">
                         <p class="text-gray-100 text-lg">
                             {% autoescape on %}
                                 {{movie.description|linebreaks}}
                             {% endautoescape %}
                         </p>
                     </div>
+                    <div class=>
+    
+                        <h2 class="text-gray-200 text-2xl font-medium">
+                            Popular on Netflix
+                        </h2>
+        
+                        <div class="flex justify-center items-center min-w-full movie_list">
+        
+                            {% for item in other_movies %}
+                                <a href="{% url 'movie:movie_detail' movie_id=item.uuid %}">
+                                    <div class="flex-shrink-0 h-60 m-4 bg-blue-500 rounded-md cursor-pointer overflow-hidden w-40" >
+                                        <img src="{{ item.flyer.url }}" class="object-cover" alt="">
+                                    </div>
+                                </a>
+                            {% endfor %}
+        
+        
+                        </div>
+                    </div>
                 </div>
             </section>
+            {% comment %} <section class='bg-primary_black  min-h-screen flex justify-center py-10'> 
+
+            </section> {% endcomment %}
             
         </main>
 
