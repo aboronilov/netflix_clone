@@ -14,6 +14,7 @@ AGE_CHOICES = (
 
 class Movie(models.Model):
     title = models.CharField(max_length=225)
+    moto = models.CharField(max_length=225)
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     uuid = models.UUIDField(default=uuid4)
