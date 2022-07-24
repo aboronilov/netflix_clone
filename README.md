@@ -1,5 +1,5 @@
 # Netflix clone using Django and Tailwind
-
+The deployed site is [here](https://i.ibb.co/5jxBKpw/image.png)
 
 ## Features
 1. Register and login user
@@ -8,9 +8,9 @@
 ![Profiles](https://i.ibb.co/5jxBKpw/image.png)
 3. Watch movie landing pages
 ![Landing page](https://i.ibb.co/5jxBKpw/image.png)
-4. Watch movie trailers
+4. Watch trailer
 ![Trailer](https://i.ibb.co/5jxBKpw/image.png)
-5. Get recommended movies
+5. Recommended movies
 ![Recommended](https://i.ibb.co/5jxBKpw/image.png)
 
 
