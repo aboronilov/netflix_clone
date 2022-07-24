@@ -26,9 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '$d6%u-0b2yym)nqvd#^jxk@m@rqn8bfbhxh2*kz!tbivh9&-c0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -87,12 +87,19 @@ WSGI_APPLICATION = 'django_netflix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3').replace('\\', '/')
-    }
-}
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'netflix',
+#             'USER': 'netflix',
+#             'PASSWORD': 'netflix',
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
+# else:
+DATABASES = {}
 
 
 # Password validation
@@ -132,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -159,3 +166,4 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQUIRED = False
 
 LOGIN_REDIRECT_URL = '/'
+
