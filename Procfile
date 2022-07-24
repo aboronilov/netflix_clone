@@ -1,0 +1,1 @@
+web gunicorn django_netflix.wsgi:application --log-file -
