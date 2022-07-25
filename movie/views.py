@@ -27,14 +27,17 @@ class MovieList(View):
                 #     'show_case': showcase
                 # }
                 movies_pks = Movie.objects.values_list('pk', flat=True)
-                random_pk = choice(movies_pks)
-                random_movie = Movie.objects.get(pk=random_pk)
-                other_movies = Movie.objects.exclude(pk=random_pk)
-                context = {
-                    'random_movie': random_movie,
-                    'other_movies': other_movies,
-                }
-                return render(request, 'movieList.html', context=context)
+                if len(movies_pks) > 0:
+                    random_pk = choice(movies_pks)
+                    random_movie = Movie.objects.get(pk=random_pk)
+                    other_movies = Movie.objects.exclude(pk=random_pk)
+                    context = {
+                        'random_movie': random_movie,
+                        'other_movies': other_movies,
+                    }
+                    return render(request, 'movieList.html', context=context)
+                else:
+                    return redirect(to='core:home')
         return render(request, 'movieList.html')
             
 
