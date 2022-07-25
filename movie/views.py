@@ -17,15 +17,6 @@ class MovieList(View):
             return redirect(to="core:profile_list")
         else:    
             if profile in request.user.profiles.all():
-                # movies = Movie.objects.filter(age_limit=profile.age_limit)
-                # try:
-                #     showcase = movies.first()
-                # except showcase.DoesNotExist:
-                #     pass
-                # context = {
-                #     'movies': movies,
-                #     'show_case': showcase
-                # }
                 movies_pks = Movie.objects.values_list('pk', flat=True)
                 if len(movies_pks) > 0:
                     random_pk = choice(movies_pks)

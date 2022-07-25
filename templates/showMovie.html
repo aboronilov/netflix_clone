@@ -16,15 +16,15 @@ Netflix - Movie
     </main>
     <script>
         const videoEl=document.querySelector('video')
-        const movie_data = JSON.parse(document.getElementById('movie_data').textContent);
-        
-       
+        const movie_data = JSON.parse(document.getElementById('movie_data').textContent); 
         const url =new URL(location.href)
-        
         const video_param = parseInt(url.searchParams.get("epi")) ? parseInt(url.searchParams.get("epi")) : 0
-
-        videoEl.setAttribute('src',`http://127.0.0.1:8000/media/${movie_data[video_param].file}`)
+        let url = movie_data[video_param].file
+        url = url.slice(0, -8)
+        videoEl.setAttribute('src',`http://127.0.0.1:8000/media/${url}`)
     </script>
 {% endblock content %}
 
     {% comment %} http://127.0.0.1:8000/media/videos/The_Departed_Official_Trailer_1_-_2006_HD.mp4 {% endcomment %}
+    {% comment %} http://127.0.0.1:8000/media/videos/Zodiac_2007_Trailer_1___Movieclips_Classic_Trailers_WROPq1E.mp4 {% endcomment %}
+    {% comment %} http://127.0.0.1:8000/media/videos/THE_GODFATHER_50th_Anniversary_Trailer_Paramount_Pictures_sS7B2D4.mp4 {% endcomment %}
