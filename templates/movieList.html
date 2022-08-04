@@ -23,7 +23,7 @@
                         {{random_movie.moto}}
                     </p>
                     <div class="flex my-4">
-                        <a href="{% url 'movie:play' movie_id=random_movie.uuid %}">
+                        <a href="{% url 'movie:play' movie_id=random_movie.uuid %}" target="_blank">
                             <button class="flex items-center bg-white py-2 px-5 rounded-md" style="color:black">
                                 <ion-icon name="play" class="text-2xl"></ion-icon>
                                 <span class="ml-3 font-medium">
@@ -84,4 +84,3 @@
         
     </main>
 {% endblock content %}
-
